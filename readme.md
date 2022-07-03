@@ -2,6 +2,7 @@
 ## Get Started
 - `yarn` to install all the packages
 - `yarn dev` to start dev server
+- create `.env` file in the project root with `VITE_GITHUB_TOKEN={{YOUR_TOKEN}}` variable if needed
 ## Components
 ### `<Avatar/>`
 - Usage
