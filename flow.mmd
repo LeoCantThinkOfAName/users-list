@@ -1,0 +1,20 @@
+sequenceDiagram
+    User->>App: Open the app
+    
+    App->>GitHub: /users?per_page=20&since=0
+    GitHub->>App: User[]
+    Note right of App: Render user list
+
+    User->>App: Click on user's card
+
+    Note right of App: Open Modal
+    App->>GitHub: /users/{{USER_NAME}}
+    GitHub->>App: User Detail
+    Note right of App: Render user data in modal
+    
+    loop Load More Users
+        User->>App: Click load more button
+        App->>GitHub: /users?per_page=20&since={{USER_ID}}
+        GitHub->>App: User[]
+        Note right of App: Render user list
+    end
