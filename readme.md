@@ -53,14 +53,14 @@ sequenceDiagram
     end
 ```
 - **User** open the **App**
-- **App** send a request to **GitHub** via `/users?per_page=20&since=0` to get the initial 20 users' data
+- **App** sends a request to **GitHub** via `/users?per_page=20&since=0` to get the initial 20 users' data
 - **App** recieves the users data from **GitHub**, parse the `Link` header's `next` page url, and store the `since` id as `nextSince` for future uses. And finally render the first 20 users with `<Card/>` component
 - When **User** clicked on one of the `<Card/>`, open the `<Modal/>` component, and uses the selected `<Card/>`'s user's `login` name as search param for `/users/{{USER_NAME}}`
 - After recieve the user's information from **GitHub**, render the detail in the `<Modal/>`
 - When **User** clicked on the `Load More` button, send another request with the lastPage's `nextSince` to **GitHub** for more users data.
 
 ## Stack of Choice
-- `TypeScript` - For a extra layer of type-safety in development
+- `TypeScript` - For extra layer of type-safety in development
 - `React` - Requirement
 - `React-Query` - I decide to not use any state management tool to handle the data from API, because I believe the data should be seperate from app state. A data cache solution should be a better fit for the job.
 
