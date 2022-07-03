@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useUsersQuery } from "./api";
 import { Avatar } from "./components/Avatar";
 import { Badge } from "./components/Badge";
@@ -14,6 +14,11 @@ const App = () => {
     isFetching,
     isFetchingNextPage,
   } = useUsersQuery();
+  const total = useMemo(() => {
+    return usersData
+      ? usersData.pages.reduce((prev, cur) => prev + cur.users.length, 0)
+      : 0;
+  }, [usersData]);
 
   return (
     <div>
@@ -41,7 +46,7 @@ const App = () => {
           className="my-2 p-2 w-full bg-blue-600 text-white rounded-sm"
           onClick={() => fetchNextPage()}
         >
-          {isFetchingNextPage ? "Loading..." : "Load More"}
+          {isFetchingNextPage ? "Loading..." : `Load More (${total})`}
         </button>
       </div>
       <Modal open={open} userName={userName} onClose={() => setOpen(false)} />
